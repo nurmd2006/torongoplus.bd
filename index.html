@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TorongoPlus</title>
+    <style>
+        /* CSS অংশ */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #eef2f3;
+        }
+
+        /* উইজেট কার্ড ডিজাইন */
+        .widget-card {
+            width: 350px;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .widget-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .thumbnail {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .visit-btn {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .visit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .iframe-btn {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .iframe-btn:hover {
+            background-color: #1e7e34;
+        }
+
+        /* ফুল পেজ আইফ্রেম ওভারলে */
+        .iframe-overlay {
+            display: none; /* শুরুতে লুকানো */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            z-index: 9999;
+        }
+
+        #site-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ক্লোজ বাটন */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .close-btn:hover {
+            background: #ff4757;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="widget-card">
+        <img src="https://torongoplus.vercel.app/thumbnail.jpg" alt="TorongoPlus Thumbnail" class="thumbnail">
+        <div class="content">
+            <div class="button-group">
+                <a href="https://torongoplus.vercel.app" target="_blank" class="btn visit-btn">Visit Original Site</a>
+                <button class="btn iframe-btn" onclick="openIframe()">Iframe View</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="iframe-container" class="iframe-overlay">
+        <button class="close-btn" onclick="closeIframe()" title="Close View">×</button>
+        <iframe src="https://torongoplus.vercel.app" id="site-iframe"></iframe>
+    </div>
+
+    <script>
+        // JavaScript অংশ
+        function openIframe() {
+            const container = document.getElementById("iframe-container");
+            container.style.display = "block";
+            // মেইন পেজের স্ক্রল বন্ধ করে দেয়
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeIframe() {
+            const container = document.getElementById("iframe-container");
+            container.style.display = "none";
+            // মেইন পেজের স্ক্রল পুনরায় চালু করে
+            document.body.style.overflow = "auto";
+        }
+
+        // 'Esc' কি চাপলে যেন আইফ্রেম বন্ধ হয়
+        window.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                closeIframe();
+            }
+        });
+    </script>
+
+</body>
+</html>
